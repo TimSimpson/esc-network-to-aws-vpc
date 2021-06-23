@@ -9,9 +9,6 @@ clean: ## Remove all build targets
 deploy: ## Runs terraform
 	@scripts/deploy.sh
 
-check-lambda: ## Checks for the Lambda
-	@scripts/check_lambda.sh
-
 check-peering: ## shows the peering connections in the AWS VPC
 	@scripts/check_peering.sh
 

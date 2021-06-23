@@ -1,6 +1,6 @@
-# AWS Lambda / VPC to Event Store Cloud Example
+# AWS VPC to Event Store Cloud Example
 
-This example shows how to spin up a Lambda in AWS along with a VPC which you can then peer to an Event Store DB instance hosted on the Event Store Cloud.
+This example shows how to spin up an Event Store Network and AWS VPC and peer the two.
 
 ## Requirements
 
@@ -26,7 +26,7 @@ export ESC_TOKEN=$(esc access token display)
 This project uses a stage name which must be passed as the Terraform variable "stage". To create one, select a name - such as your own - and export it to the environment variable "TF_VAR_stage", such as:
 
 ```bash
-export TF_VAR_stage=tim
+export TF_VAR_stage=$USER
 ```
 
 It also requires a region, set as the Terraform variable "region". Set one like so:
