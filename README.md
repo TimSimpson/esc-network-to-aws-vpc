@@ -1,12 +1,8 @@
-# AWS VPC to Event Store Cloud Example
+# Event Store Cloud to AWS VPC Example
 
 This example shows how to spin up an Event Store Network and AWS VPC and peer the two.
 
 ## Requirements
-
-### AWS Credentials
-
-You'll need to set either the traditional AWS environment variables, such as AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, or configure them in the files ~/.aws/credentials. Click [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables) for more info.
 
 ### Event Store Cloud Credentials
 
@@ -20,6 +16,11 @@ You can get an access token by running `esc access token display` using the [Eve
 ```bash
 export ESC_TOKEN=$(esc access token display)
 ```
+
+### AWS Credentials
+
+You'll need to set either the traditional AWS environment variables, such as AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, or configure them in the files ~/.aws/credentials. Click [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables) for more info.
+
 
 ### Other Settings
 
