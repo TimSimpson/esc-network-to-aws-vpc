@@ -90,7 +90,9 @@ resource "eventstorecloud_network" "network" {
   cidr_block        = "172.21.0.0/16"
 }
 
-resource "eventstorecloud_peering" "example" {
+// Initiates a peering request from the Event Store Cloud Network and sets
+// all necessary internal routes
+resource "eventstorecloud_peering" "peering" {
   name = local.project_name
 
   project_id = eventstorecloud_network.network.project_id
@@ -104,9 +106,29 @@ resource "eventstorecloud_peering" "example" {
   routes          = [aws_vpc.vpc.cidr_block]
 }
 
+// Accepts the initiated peering from the Event Store Cloud from our AWS account
 resource "aws_vpc_peering_connection_accepter" "peer" {
   provider                  = aws
-  vpc_peering_connection_id = eventstorecloud_peering.example.provider_metadata.aws_peering_link_id
+  vpc_peering_connection_id = eventstorecloud_peering.peering.provider_metadata.aws_peering_link_id
   auto_accept               = true
 }
 
+// Set up the routes on the AWS side to be able to communicate with ESC
+resource "aws_route" "aws_to_esc" {
+  route_table_id            = aws_vpc.vpc.default_route_table_id
+  destination_cidr_block    = eventstorecloud_network.network.cidr_block
+  vpc_peering_connection_id = eventstorecloud_peering.peering.provider_metadata.aws_peering_link_id
+}
+
+resource "eventstorecloud_managed_cluster" "cluster" {
+  name = local.project_name
+
+  project_id = eventstorecloud_network.network.project_id
+  network_id = eventstorecloud_network.network.id
+
+  topology       = "single-node"
+  instance_type  = "F1"
+  disk_size      = 8
+  disk_type      = "gp2"
+  server_version = "20.10"
+}

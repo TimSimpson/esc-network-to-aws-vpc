@@ -40,8 +40,12 @@ export TF_VAR_region=us-east-1
 After setting the required environment variables mentioned above, do this:
 
 ```bash
-cd terraform
+pushd terraform
 terraform plan
 terraform apply
+popd
 
-````
+# View the created peerings
+./scripts/check_peering.sh
+
+```

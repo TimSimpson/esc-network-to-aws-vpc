@@ -12,7 +12,7 @@ deploy: ## Runs terraform
 check-lambda: ## Checks for the Lambda
 	@scripts/check_lambda.sh
 
-check-peering: ## Checks for the Lambda
+check-peering: ## shows the peering connections in the AWS VPC
 	@scripts/check_peering.sh
 
 .PHONY: help
