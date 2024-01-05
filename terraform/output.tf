@@ -13,3 +13,15 @@ output "caller_user" {
 output "aws_vpc_arn" {
   value = aws_vpc.vpc.arn
 }
+
+output "public_ip" {
+  value = aws_eip.application.public_ip
+}
+
+output "private_ip" {
+  value = aws_eip.application.public_ip
+}
+
+output "cluster_dns_name" {
+  value = eventstorecloud_managed_cluster.cluster.dns_name
+}
